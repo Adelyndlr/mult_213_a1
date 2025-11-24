@@ -1,11 +1,24 @@
 import { renderMessage } from "./dom.js";
 import { getCatFact, getDogImage } from "./api.js";
 
+let userName = "";
+
 // Grab references to various parts of the HTML page
+const userForm = document.querySelector("#user-form");
+const userInput = document.querySelector("#user");
 const catForm = document.querySelector("#cat-form");
 const catOutput = document.querySelector("#cat-output");
 const dogForm = document.querySelector("#dog-form");
 const dogOutput = document.querySelector("#dog-output");//I mistyped an extra w "#wdog-output" 
+
+//Keep the name for the user name
+userForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    userName = userInput.value.trim();
+    if (userName) {
+        alert(`Thanks, ${userName}!`);
+    }
+});
 
 catForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -36,7 +49,9 @@ catForm.addEventListener("submit", async (e) => {
 
 
     //Copied this from my assistant because I wanted the emoji
-    renderMessage(catOutput, `<p>🐱 ${fact}</p>`);
+    //Also had to fix it to include the user's name
+    renderMessage(catOutput, `<p>${userName ? userName + ', here is a cat fact: ' : ''}🐱${fact}</p>`);
+
   } catch (err) {
     renderMessage(catOutput, `Error: ${err.message}`);
   }
