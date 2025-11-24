@@ -1,10 +1,10 @@
-// API function to integrate with Open-Meteo Geocoding and Weather APIs
+//Reference for cat fact api: https://catfact.ninja/ from a open source api list
 // Reference for the dogs api: https://medium.com/codex/15-fun-and-interesting-apis-to-use-for-your-next-coding-project-in-2022-86a4ff3a2742
 //
 
-//Was calling this function wrong catFact without the 'get'
-//*****leave the parenthesis empty?
-export async function getCatFact() {
+//Was calling this async wrong --> catFact, without the 'get'
+//This is how I had it: export async function getCatFact() 
+export const getCatFact = async () => {
   const res = await fetch(
     `https://catfact.ninja/fact`
   );
@@ -18,7 +18,8 @@ export async function getCatFact() {
   return data.fact;
 }
 
-export async function getDogImage() {
+//This is how I had it: export async function getDogImage() 
+export const getDogImage = async () => {
   const res = await fetch(
     `https://dog.ceo/api/breeds/image/random`
   );

@@ -1,9 +1,9 @@
 {
-  "name": "webpage_app",
-  "author": "Jesse Rolheiser",
+  "name": "Cat and dog facts",
+  "author": "Adelyn De la Rosa",
   "version": "1.0.0",
-  "description": "Weather App",
-  "main": "index.js",
+  "description": "Facts about cats and pictures of dogs!",
+  "main": "app.js",
   "scripts": {
     "build": "esbuild src/app.js --bundle --outfile=dist/main.js",
     "watch": "esbuild src/app.js --bundle --outfile=dist/main.js --watch"

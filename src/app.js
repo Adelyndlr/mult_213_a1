@@ -1,6 +1,7 @@
 import { renderMessage } from "./dom.js";
 import { getCatFact, getDogImage } from "./api.js";
 
+//For saving the user name temporarily
 let userName = "";
 
 // Grab references to various parts of the HTML page
@@ -9,12 +10,13 @@ const userInput = document.querySelector("#user");
 const catForm = document.querySelector("#cat-form");
 const catOutput = document.querySelector("#cat-output");
 const dogForm = document.querySelector("#dog-form");
-const dogOutput = document.querySelector("#dog-output");//I mistyped an extra w "#wdog-output" 
+const dogOutput = document.querySelector("#dog-output");//I mistyped an extra w "#wdog-output" so it wasn't working 
 
 //Keep the name for the user name
 userForm.addEventListener("submit", (e) => {
     e.preventDefault();
     userName = userInput.value.trim();
+    //For a dialog box to thank the user
     if (userName) {
         alert(`Thanks, ${userName}!`);
     }
@@ -22,11 +24,6 @@ userForm.addEventListener("submit", (e) => {
 
 catForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-
-   /*I don't need the if statement since there's no input field
-     const cat = document.querySelector("#city").value.trim();
-
-  if (!city) return;*/
 
   renderMessage(catOutput, "Loading mishi fact…");
 
@@ -36,7 +33,7 @@ catForm.addEventListener("submit", async (e) => {
 
     //This is from the starter but I want to keep the note for comparison
     /*if (data.length === 0) {
-        renderMessage(cityList, `No results found for "${cat}".`);
+        renderMessage(cityList, `No results found for "${city}".`);
         return;
     }
     let message = `Found ${data.length} result(s) for "${city}":`;
@@ -47,9 +44,8 @@ catForm.addEventListener("submit", async (e) => {
     message += "</ul>";*/
 
 
-
-    //Copied this from my assistant because I wanted the emoji
-    //Also had to fix it to include the user's name
+    //Copied this from my assistant because I wanted the cat emoji
+    //Also had to fix it to include the user's name, 
     renderMessage(catOutput, `<p>${userName ? userName + ', here is a cat fact: ' : ''}🐱${fact}</p>`);
 
   } catch (err) {
@@ -81,7 +77,7 @@ dogForm.addEventListener("submit", async (e) => {
     try {
         const image = await getDogImage();
         //My assistant suggested this way to render the image but I think I can do it in css
-        renderMessage(dogOutput,`<img src="${image}" alt="Random dog" style="max-width:100%;">`);
+        renderMessage(dogOutput,`<img src="${image}" alt="Random dog picture" style="max-width:100%;">`);
     } catch (err) {
         renderMessage(dogOutput, `Error: ${err.message}`);
     }
