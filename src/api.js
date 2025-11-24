@@ -1,7 +1,10 @@
 // API function to integrate with Open-Meteo Geocoding and Weather APIs
-// Reference: https://open-meteo.com/
+// Reference for the dogs api: https://medium.com/codex/15-fun-and-interesting-apis-to-use-for-your-next-coding-project-in-2022-86a4ff3a2742
+//
 
-export async function catFact(cat) {
+//Was calling this function wrong catFact without the 'get'
+//*****leave the parenthesis empty?
+export async function getCatFact() {
   const res = await fetch(
     `https://catfact.ninja/fact`
   );
@@ -10,18 +13,20 @@ export async function catFact(cat) {
 
   console.log(data);
 
-  return data.results || [];
+  //---return data.results || [];
+  //******assistant suggested to change result for fact.
+  return data.fact;
 }
 
-export async function fetchWeather(lat, lon) {
-  // Hardcode coordinates or use a simple free API.
+export async function getDogImage() {
   const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+    `https://dog.ceo/api/breeds/image/random`
   );
 
   const data = await res.json();
 
   console.log(data);
 
-  return data.current_weather ?? "N/A";
+  return data.message;
+  //---return data.dog_image ?? "N/A";
 }
