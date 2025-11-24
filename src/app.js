@@ -1,45 +1,52 @@
 import { renderMessage } from "./dom.js";
-import { catFact, dogImage } from "./api.js";
+import { getCatFact, getDogImage } from "./api.js";
 
 // Grab references to various parts of the HTML page
-const catofacto = document.querySelector("#cat-fact");
-const randomRandom = document.querySelector("#random-random");
-const imageDog = document.querySelector("#dog-image");
+const catForm = document.querySelector("#cat-form");
+const catOutput = document.querySelector("#cat-output");
+const dogForm = document.querySelector("#dog-form");
 const dogOutput = document.querySelector("#dog-output");//I mistyped an extra w "#wdog-output" 
 
-catofacto.addEventListener("submit", async (e) => {
+catForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const cat = document.querySelector("#city").value.trim();
-  if (!city) return;
+   /*I don't need the if statement since there's no input field
+     const cat = document.querySelector("#city").value.trim();
 
-  renderMessage(cityList, "Loading…");
+  if (!city) return;*/
+
+  renderMessage(catOutput, "Loading mishi fact…");
 
   try {
-    const data = await catFact(cat);
-    if (data.length === 0) {
+    const fact = await getCatFact();
+
+
+    //This is from the starter but I want to keep the note for comparison
+    /*if (data.length === 0) {
         renderMessage(cityList, `No results found for "${cat}".`);
         return;
     }
-    
     let message = `Found ${data.length} result(s) for "${city}":`;
-    
     message += "<ul>";
     data.forEach((item) => {
         message += `<li>${item.name}, ${item.country} (Lat: ${item.latitude}, Lon: ${item.longitude})</li>`;
     });
-    message += "</ul>";
-    
-    renderMessage(cityList, message);
+    message += "</ul>";*/
+
+
+
+    //Copied this from my assistant because I wanted the emoji
+    renderMessage(catOutput, `<p>🐱 ${fact}</p>`);
   } catch (err) {
-    renderMessage(cityList, `Error: ${err.message}`);
+    renderMessage(catOutput, `Error: ${err.message}`);
   }
 });
 
-weatherForm.addEventListener("submit", async (e) => {
+dogForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const latStr = document.querySelector("#lat").value.trim();
+    //This is from the starter but I want to keep the note for comparison
+    /*const latStr = document.querySelector("#lat").value.trim();
     const lonStr = document.querySelector("#lon").value.trim();
 
     if (!latStr || !lonStr) {
@@ -52,14 +59,15 @@ weatherForm.addEventListener("submit", async (e) => {
     if (Number.isNaN(lat) || Number.isNaN(lon)) {
         renderMessage(weatherOutput, "Latitude and longitude must be valid numbers.");
         return;
-    }
+    }*/
 
-    renderMessage(weatherOutput, "Loading Weather Data…");
+    renderMessage(dogOutput, "Loading good boy image…");
 
     try {
-        const weather = await fetchWeather(lat, lon);
-        renderMessage(weatherOutput, `<pre>${JSON.stringify(weather, null, 2)}</pre>`);
+        const image = await getDogImage();
+        //My assistant suggested this way to render the image but I think I can do it in css
+        renderMessage(dogOutput,`<img src="${image}" alt="Random dog" style="max-width:100%;">`);
     } catch (err) {
-        renderMessage(weatherOutput, `Error: ${err.message}`);
+        renderMessage(dogOutput, `Error: ${err.message}`);
     }
 });
