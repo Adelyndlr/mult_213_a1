@@ -1,24 +1,24 @@
 import { renderMessage } from "./dom.js";
-import { searchCity, fetchWeather } from "./api.js";
+import { catFact, dogImage } from "./api.js";
 
 // Grab references to various parts of the HTML page
-const cityForm = document.querySelector("#city-form");
-const cityList = document.querySelector("#city-list");
-const weatherForm = document.querySelector("#weather-form");
-const weatherOutput = document.querySelector("#weather-output");
+const catofacto = document.querySelector("#cat-fact");
+const randomRandom = document.querySelector("#random-random");
+const imageDog = document.querySelector("#dog-image");
+const dogOutput = document.querySelector("#dog-output");//I mistyped an extra w "#wdog-output" 
 
-cityForm.addEventListener("submit", async (e) => {
+catofacto.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const city = document.querySelector("#city").value.trim();
+  const cat = document.querySelector("#city").value.trim();
   if (!city) return;
 
   renderMessage(cityList, "Loading…");
 
   try {
-    const data = await searchCity(city);
+    const data = await catFact(cat);
     if (data.length === 0) {
-        renderMessage(cityList, `No results found for "${city}".`);
+        renderMessage(cityList, `No results found for "${cat}".`);
         return;
     }
     
